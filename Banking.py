@@ -137,5 +137,49 @@ def access(login):
       fbalance = int(attributes[2])
       changestouser.append([fuser,fbalance])
 
+action = "Logged in."
+  print("Welcome to Aqib's Banking system,",login.username)
+  print("You are a:",str(login.rank))
+  print("\nYour options:")
+  time.sleep(0.5)
+  print("Check balance, deposit, withdraw, send money.")
+  
+  if login.rank == "CEO":
+    print("\nAs you have the CEO rank, you have these extra options:")
+    print("- Set balance")
+    print("- Deduct balance")
+    print("- Add to balance")
+
+  time.sleep(0.1)
+  print("\n\nIf you wish to exit and logout, type 'logout'.")
+  time.sleep(0.1)
+
+
+  
+  while action != "logout":
+    action = input("Enter action: ").lower()
+    if action == "check balance":
+      login.checkbalance()
+    elif action == "deposit":
+      depositamount = int(input("How much do you want to deposit: "))
+      login.deposit(depositamount)
+    elif action == "withdraw":
+      withdrawamount = int(input("How much do you want to withdraw: "))
+      login.withdraw(withdrawamount)
+    elif action == "send money":
+      correcttarget = False
+      while correcttarget == False:
+        target = str(input("Who do you want to send money to: ")).lower()
+        for object in gc.get_objects():
+          if isinstance(object, BankingSystem):
+            if str(object.username).lower() == target:
+              correcttarget = True
+              targetuser = object
+      else:
+        print("User found.")
+      sendamount = int(input("Enter amount to send to user: "))
+      login.sendmoney(targetuser,sendamount)
+
+
 
 
