@@ -220,6 +220,54 @@ elif action == "set balance":
       addbalanceamount = int(input("Enter amount to add to balance: "))
       login.add_balance(targetuser,addbalanceamount)
   else:
+for object in gc.get_objects():
+      if isinstance(object, BankingSystem):
+        for i in changestouser:
+          if object.username == i[0]:
+            i[1] = object.balance
+    for i in changestouser:
+      for line in fileinput.input(files = "bankdatabackup.txt"):
+        attributes = line.split(':')
+        fuser = str(attributes[0])
+        fbalance = attributes[2]
+
+
+
+    bankdata = open('bankdata.txt', 'w')
+    bankdatabackup = open('bankdatabackup.txt','r')
+    bankdata.write(bankdatabackup.read())
+
+    
+    
+    bankdata.close()
+    bankdatabackup.close()
+    
+    bankdatabackup = open('bankdatabackup.txt','w')
+    bankdata = open('bankdata.txt', 'r')
+    bankdatatext = str(bankdata.read())
+    bankdatabackup.write(bankdatatext)
+    bankdata.close()
+    bankdatabackup.close()
+    
+
+
+    
+
+
+auth, login = authentication()
+
+time.sleep(0.2)
+print("\n\n") #white spaces
+
+for i in range(1,4):
+  print("Accessing Servers..",i)
+  time.sleep(1)
+
+print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n") #white spaces
+
+if auth == "Authenticated":
+  access(login)
+
 
 
 
