@@ -88,4 +88,54 @@ with open('bankdatabackup.txt') as f:
     fpass = attributes[1]
     fbalance = int(attributes[2])
     frank = attributes[3].replace("\n", "")
+   if frank == "CEO":
+     globals()[str(attributes[0])] = ceo(fuser, fpass, fbalance, frank)
+   else:
+     globals()[str(attributes[0])] = BankingSystem(fuser, fpass, fbalance, frank)
+      
+
+
+
+def authentication():
+  validuser = False
+  validpassword = False
+
+  while validuser == False:
+    useraccess = input("Which account do you want to sign into: ").lower()
+
+    for object in gc.get_objects():
+      if isinstance(object, BankingSystem):
+        if str(object.username).lower() == useraccess:
+          authenticateduser = object
+          validuser = True
+  else:
+    print("Account found.")
+    time.sleep(1)
+  print("Username:",useraccess)
+
+  while validpassword == False:
+    enterpassword = input("Password: ")
+
+    for object in gc.get_objects():
+      if isinstance(object, BankingSystem):
+        if object.password == enterpassword:
+          print("Authenticated.")
+          validpassword = True
+  return "Authenticated", authenticateduser
+
+
+
+
+def access(login):
+  
+  changestouser = []
+  with open('bankdatabackup.txt') as f:
+    for line in f:
+      
+      attributes = line.split(':')
+      fuser = attributes[0]
+      fbalance = int(attributes[2])
+      changestouser.append([fuser,fbalance])
+
+
 
