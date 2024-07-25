@@ -180,6 +180,47 @@ action = "Logged in."
       sendamount = int(input("Enter amount to send to user: "))
       login.sendmoney(targetuser,sendamount)
 
+elif action == "set balance":
+      correcttarget = False
+      while correcttarget == False:
+        target = str(input("Who's balance do you want to set: ")).lower()
+        for object in gc.get_objects():
+          if isinstance(object, BankingSystem):
+            if str(object.username).lower() == target:
+              correcttarget = True
+              targetuser = object
+      else:
+        print("User found.")
+      setbalanceamount = int(input("Enter amount to set balance to: "))
+      login.set_balance(targetuser,setbalanceamount)
+    elif action == "deduct balance":
+      correcttarget = False
+      while correcttarget == False:
+        target = str(input("Who's balance do you want to deduct: ")).lower()
+        for object in gc.get_objects():
+          if isinstance(object, BankingSystem):
+            if str(object.username).lower() == target:
+              correcttarget = True
+              targetuser = object
+      else:
+        print("User found.")
+      deductbalanceamount = int(input("Enter amount to deduct from balance: "))
+      login.deduct_balance(targetuser,deductbalanceamount)
+    elif action == "add balance":
+      correcttarget = False
+      while correcttarget == False:
+        target = str(input("Who's balance do you want to add to: ")).lower()
+        for object in gc.get_objects():
+          if isinstance(object, BankingSystem):
+            if str(object.username).lower() == target:
+              correcttarget = True
+              targetuser = object
+      else:
+        print("User found.")
+      addbalanceamount = int(input("Enter amount to add to balance: "))
+      login.add_balance(targetuser,addbalanceamount)
+  else:
+
 
 
 
