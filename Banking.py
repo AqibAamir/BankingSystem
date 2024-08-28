@@ -20,7 +20,7 @@ class BankingSystem:
     print(self.username+"'s balance: ", self.balance)
 
   def withdraw(self, amount):
-    print("\n") #white spaces
+    print("\n") 
 
     if self.balance >= amount:
       previousbalance = self.balance
@@ -28,22 +28,22 @@ class BankingSystem:
 
       print(amount,"has been withdrawn from account:",self.username)
       print("Previous Balance:",previousbalance,"\nNew Balance:",self.balance)
-      print("\n") #white spaces
+      print("\n")
 
     else:
       print("Insufficient balance.")
 
   def deposit(self, amount):
     previousbalance = self.balance
-    print("\n") # white spaces
+    print("\n") 
     self.balance = self.balance + amount
 
-print(amount,"has been deposited into account:",self.username)
+    print(amount,"has been deposited into account:",self.username)
     print("Previous Balance:",previousbalance,"\nNew Balance:",self.balance)
-    print("\n") # white spaces
+    print("\n") 
 
   def sendmoney(self,receiver,amount):
-    print("\n") #white spaces
+    print("\n") 
     if self.balance >= amount:
 
       previousbalance = self.balance
@@ -52,7 +52,7 @@ print(amount,"has been deposited into account:",self.username)
 
       print(self.username," has sent", amount,"to",receiver.username)
       print(self.username,"Info- \nPrevious Balance:",previousbalance,"\nNew Balance:",self.balance)
-      print("\n") #white spaces
+      print("\n") 
 
     else:
       print("Insufficient balance to send money.")
@@ -77,10 +77,10 @@ class ceo(BankingSystem):
 
 
 
-#objects
 
 
-#load data
+
+
 with open('bankdatabackup.txt') as f:
   for line in f:
     attributes = line.split(':')
@@ -88,10 +88,11 @@ with open('bankdatabackup.txt') as f:
     fpass = attributes[1]
     fbalance = int(attributes[2])
     frank = attributes[3].replace("\n", "")
-   if frank == "CEO":
-     globals()[str(attributes[0])] = ceo(fuser, fpass, fbalance, frank)
-   else:
-     globals()[str(attributes[0])] = BankingSystem(fuser, fpass, fbalance, frank)
+
+    if frank == "CEO":
+      globals()[str(attributes[0])] = ceo(fuser, fpass, fbalance, frank)
+    else:
+      globals()[str(attributes[0])] = BankingSystem(fuser, fpass, fbalance, frank)
       
 
 
@@ -137,7 +138,8 @@ def access(login):
       fbalance = int(attributes[2])
       changestouser.append([fuser,fbalance])
 
-action = "Logged in."
+  
+  action = "Logged in."
   print("Welcome to Aqib's Banking system,",login.username)
   print("You are a:",str(login.rank))
   print("\nYour options:")
@@ -180,7 +182,10 @@ action = "Logged in."
       sendamount = int(input("Enter amount to send to user: "))
       login.sendmoney(targetuser,sendamount)
 
-elif action == "set balance":
+
+
+      
+    elif action == "set balance":
       correcttarget = False
       while correcttarget == False:
         target = str(input("Who's balance do you want to set: ")).lower()
@@ -220,7 +225,9 @@ elif action == "set balance":
       addbalanceamount = int(input("Enter amount to add to balance: "))
       login.add_balance(targetuser,addbalanceamount)
   else:
-for object in gc.get_objects():
+
+    
+    for object in gc.get_objects():
       if isinstance(object, BankingSystem):
         for i in changestouser:
           if object.username == i[0]:
@@ -257,17 +264,16 @@ for object in gc.get_objects():
 auth, login = authentication()
 
 time.sleep(0.2)
-print("\n\n") #white spaces
+print("\n\n") 
 
 for i in range(1,4):
   print("Accessing Servers..",i)
   time.sleep(1)
 
-print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n") #white spaces
+print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n") 
 
 if auth == "Authenticated":
   access(login)
-
 
 
 
